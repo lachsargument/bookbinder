@@ -109,6 +109,15 @@ func makeBooklet(_ src: PDFDocument, to url: URL) throws {
                     .cropBox, rect: rect, rotate: 0,
                     preserveAspectRatio: true))
             ctx.clip(to: page.getBoxRect(.cropBox))
+            // Quartz writes the clip lazily, at the first painting operator.
+            // For a tagged source (Typst, Word), the first one is inside the
+            // page's first marked-content block, so the output gets
+            // "q BDC Q q <clip> ... Q EMC". Some printer RIPs (seen on Ricoh)
+            // then drop that first object on each half. Paint the slot white
+            // first so the clip is written before any BDC. Opaque white, not
+            // alpha 0, so the sheet has no transparency for the RIP to flatten.
+            ctx.setFillColor(gray: 1, alpha: 1)
+            ctx.fill(page.getBoxRect(.cropBox))
             ctx.drawPDFPage(page)
             ctx.restoreGState()
         }
