@@ -1,6 +1,6 @@
 # Commands
 
-- Build app bundle: `./build.sh` (outputs the `.app` in the repo root)
+- Build app and DMG: `./build.sh` (outputs a universal `Bookbinder.app` and `Bookbinder-<version>.dmg` in the repo root; set the version in `APP_VERSION`)
 - Run self-check: `./test.sh` (compiles `Core.swift` + `tests/main.swift`; samples go to `.build/`)
 - Format: `swift format -i -r .` (config in `.swift-format`)
 

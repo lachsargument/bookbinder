@@ -18,3 +18,6 @@ To make a booklet:
 For 4 pages, the front of the sheet shows pages 1 and 4. The back shows pages 3 and 2.
 
 To build the app, run `./build.sh`. You need the Xcode command line tools.
+The script makes `Bookbinder.app` and `Bookbinder-1.1.dmg`. The app runs on Apple silicon and Intel Macs.
+
+To install, open the DMG and drag `Bookbinder.app` to `Applications`.
